@@ -53,6 +53,7 @@
                         <button class="xhr-button js-send-push-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                             Send a Push via XHR
                         </button>
+                        <button id="test-notification">Submit</button>
                     </p>
 
                     <hr />
@@ -114,9 +115,22 @@
                     <h1 class="error-title js-error-title"></h1>
                     <p class="error-message js-error-message"></p>
                 </div>
+                
             </div>
         </main>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+        var socket = io('http://localhost:1603', {origins:"*"});
+        document.getElementById('test-notification').addEventListener('click', function() {
+            socket.emit('notification', "Do something")
+        })
+
+
+        // io.connect( 'localhost:1603', { transports: [ 'websocket' ], path: "/socket.io/socket.io.js" } )
+    </script> 
+
 
     <script src="./scripts/constants.js"></script>
     <script src="./scripts/libs/idb-keyval.js"></script>

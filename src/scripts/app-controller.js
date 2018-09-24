@@ -1,7 +1,4 @@
-/* global PushClient, MaterialComponentsSnippets */
-/* eslint-env browser */
 const BACKEND_ORIGIN = `https://simple-push-demo.appspot.com`;
-// const BACKEND_ORIGIN = `http://localhost:8080`;
 
 class AppController {
     constructor() {
@@ -70,6 +67,16 @@ class AppController {
             });
 
         const sendPushViaXHRButton = document.querySelector('.js-send-push-button');
+
+        socket.on("show-notification", (data) =>{
+            if (this._currentSubscription) {
+                this.sendPushMessage(this._currentSubscription,
+                    this._payloadTextField.value);
+            }
+        })
+
+
+
         sendPushViaXHRButton.addEventListener('click', () => {
             if (this._currentSubscription) {
                 this.sendPushMessage(this._currentSubscription,
